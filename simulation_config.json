@@ -1,0 +1,21 @@
+{
+    "time_step": 0.01,
+    "total_time": 1.0,
+    "output_file": "simulation_output.h5",
+    "export_interval": 0.1,
+    "export_directory": "exported_data",
+    "initial_conditions": [
+        {
+            "position": [0.0, 0.0, 0.0],
+            "properties": {
+                "temperature": 300.0,
+                "scalar_property_name": 0.0
+            }
+        }
+    ],
+    "flow_field_file": "flow_field_data.h5",
+    "flow_field_time_dependent": false,
+    "mechanism_file": "chemical_mechanism.yaml",
+    "micromixing_constant": 1.0,
+    "diffusivity": 1e-5
+}
