@@ -74,3 +74,8 @@ class ParticleManager:
         y = np.random.uniform(0, 1)
         z = np.random.uniform(0, 1)
         return [x, y, z]
+
+
+    def total_particle_count(self):
+        """Returns the total count of particles managed."""
+        return len(self.particles)

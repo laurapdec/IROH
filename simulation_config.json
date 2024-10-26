@@ -17,5 +17,6 @@
     "output_file": "simulation_output.h5",
     "export_directory": "exported_data",
     "micromixing_constant": 1.0,
-    "diffusivity": 1e-5
+    "diffusivity": 1e-5,
+    "micromixing_model": "adaptive" 
 }
