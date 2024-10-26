@@ -4,7 +4,9 @@ import unittest
 import h5py
 import numpy as np
 import os
+import cantera as ct
 
+from chemistry.kinetics import ChemicalKinetics
 from particles.particle import Particle
 from particles.particle_manager import ParticleManager
 from fluid_solver.solver_interface import FluidSolverInterface
@@ -134,6 +136,47 @@ class TestMicromixingModel(unittest.TestCase):
         self.micromixing_model.mix_particle(self.particle, micromixing_rate, self.mean_properties)
         expected_temperature = initial_temperature - micromixing_rate * (initial_temperature - self.mean_properties['temperature']) * self.config['time_step']
         self.assertAlmostEqual(self.particle.properties['temperature'], expected_temperature)
+
+class TestChemicalKinetics(unittest.TestCase):
+    def setUp(self):
+       # Mock configuration with a larger time step to allow for reaction progress
+        self.config = {
+            'mechanism_file': 'gri30.yaml',
+            'time_step': 1e-3  # Increase time step temporarily
+        }
+        # Initialize the chemical kinetics module
+        self.chemistry = ChemicalKinetics(self.config)
+        # Create a particle with initial composition
+        self.particle = Particle(
+            position=[0.0, 0.0, 0.0],
+            properties={
+                'temperature': 1200.0,  # Increase initial temperature
+                'pressure': ct.one_atm,
+                'CH4': 0.5,
+                'O2': 0.5,
+                'N2': 0.0
+            }
+        )
+        
+    def test_load_mechanism(self):
+        self.assertIsNotNone(self.chemistry.gas)
+        self.assertIn('CH4', self.chemistry.gas.species_names)
+
+    def test_react_particles(self):
+        initial_CH4 = self.particle.properties['CH4']
+        initial_temperature = self.particle.properties['temperature']
+
+        self.chemistry.react_particles([self.particle])
+
+        # After reaction, CH4 should decrease and temperature should increase (exothermic reaction)
+        final_CH4 = self.particle.properties['CH4']
+        final_temperature = self.particle.properties['temperature']
+
+        self.assertLess(final_CH4, initial_CH4)
+        self.assertGreater(final_temperature, initial_temperature)
+
+    def tearDown(self):
+        pass  # No cleanup needed
 
 if __name__ == '__main__':
     unittest.main()

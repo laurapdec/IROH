@@ -1,38 +1,36 @@
-# Byte-compiled / optimized / DLL files
+# Byte-compiled files
 __pycache__/
 *.py[cod]
-*$py.class
 
-# Virtual environment directories
+# Virtual environment
 .venv/
+env/
 venv/
 
-# Distribution / packaging
-build/
-dist/
+# macOS-specific files
+.DS_Store
+
+# Python egg and build files
 *.egg-info/
+dist/
+build/
+*.egg
 
-# Testing results
-.coverage
-htmlcov/
-.tox/
+# HDF5 data files (large and often regenerated)
+*.h5
 
-# PyInstaller
-*.manifest
-*.spec
+# Exported data files
+exported_data/
+data_*.dat
+scalar_variance.dat
 
-# Jupyter Notebook checkpoints
-.ipynb_checkpoints/
+# Logs (if any logging is used)
+*.log
 
-# IDE or editor-specific files
+# IDE and editor settings
 .vscode/
 .idea/
-*.sublime-project
-*.sublime-workspace
+*.swp
 
-# Logs and databases
-*.log
-*.sqlite3
-
-# macOS files
-.DS_Store
+# Git-specific
+.git/

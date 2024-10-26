@@ -1,21 +1,21 @@
 {
-    "time_step": 0.01,
+    "mechanism_file": "gri30.yaml",
+    "time_step": 1e-4,
     "total_time": 1.0,
-    "output_file": "simulation_output.h5",
-    "export_interval": 0.1,
-    "export_directory": "exported_data",
-    "initial_conditions": [
-        {
-            "position": [0.0, 0.0, 0.0],
-            "properties": {
-                "temperature": 300.0,
-                "scalar_property_name": 0.0
-            }
-        }
-    ],
+    "num_particles": 100,
+    "initial_conditions": {
+        "composition": {
+            "CH4": 0.095,
+            "O2": 0.21,
+            "N2": 0.695
+        },
+        "temperature": 1200.0,
+        "pressure": 101325
+    },
     "flow_field_file": "flow_field_data.h5",
-    "flow_field_time_dependent": false,
-    "mechanism_file": "chemical_mechanism.yaml",
+    "export_interval": 0.1,
+    "output_file": "simulation_output.h5",
+    "export_directory": "exported_data",
     "micromixing_constant": 1.0,
     "diffusivity": 1e-5
 }

@@ -67,9 +67,10 @@ class SimulationEngine:
             S = self.tensor_calculus.compute_rate_of_strain(position, self.fluid_solver)
             self.micromixing_model.apply_mixing(particle, S, mean_properties)
 
-    def process_reactions(self):
-        self.chemistry.react_particles(self.particle_manager.particles, self.time_step)
 
+    def process_reactions(self):
+        self.chemistry.react_particles(self.particle_manager.particles)
+        
     def collect_data(self):
         self.output_handler.save_state(self.time, self.particle_manager.particles)
         # Additional data collection, such as scalar variance
