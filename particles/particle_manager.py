@@ -25,3 +25,17 @@ class ParticleManager:
     def get_stochastic_displacement(self, time_step):
         sigma = np.sqrt(2 * self.diffusivity * time_step)
         return np.random.normal(0, sigma, size=3)
+
+    def mean_scalar_values(self):
+        """
+        Calculate mean scalar values across all particles.
+        :return: dict of mean scalar values
+        """
+        num_particles = len(self.particles)
+        scalar_sums = {}
+        for particle in self.particles:
+            for scalar, value in particle.properties.items():
+                scalar_sums[scalar] = scalar_sums.get(scalar, 0.0) + value
+
+        mean_values = {scalar: total / num_particles for scalar, total in scalar_sums.items()}
+        return mean_values

@@ -54,10 +54,18 @@ class SimulationEngine:
     
     def update_fluid_field(self):
         self.fluid_solver.update_flow_field(self.time)
-
+    
     def transport_and_mix_particles(self):
         self.particle_manager.move_particles(self.time_step, self.fluid_solver)
-        self.micromixing_model.apply_mixing(self.particle_manager.particles, self.tensor_calculus)
+
+        # Calculate mean scalar values
+        mean_properties = self.particle_manager.mean_scalar_values()
+
+        # For each particle, compute the rate-of-strain tensor and apply micromixing
+        for particle in self.particle_manager.particles:
+            position = particle.position
+            S = self.tensor_calculus.compute_rate_of_strain(position, self.fluid_solver)
+            self.micromixing_model.apply_mixing(particle, S, mean_properties)
 
     def process_reactions(self):
         self.chemistry.react_particles(self.particle_manager.particles, self.time_step)

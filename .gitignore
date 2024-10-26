@@ -3,13 +3,36 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# Virtual environment folders
+# Virtual environment directories
 .venv/
 venv/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Testing results
+.coverage
+htmlcov/
+.tox/
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
 
 # IDE or editor-specific files
 .vscode/
 .idea/
+*.sublime-project
+*.sublime-workspace
 
-# macOS metadata files
+# Logs and databases
+*.log
+*.sqlite3
+
+# macOS files
 .DS_Store
