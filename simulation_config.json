@@ -13,10 +13,20 @@
         "pressure": 101325
     },
     "flow_field_file": "flow_field_data.h5",
-    "export_interval": 0.1,
+    "export_interval": 0.01,
     "output_file": "simulation_output.h5",
     "export_directory": "exported_data",
     "micromixing_constant": 1.0,
     "diffusivity": 1e-5,
-    "micromixing_model": "adaptive" 
+    "micromixing_model": "adaptive",
+    "output_config": {
+        "species_of_interest": ["CH4", "O2", "N2", "CO"],
+        "temperature_contours": true,
+        "scalar_variance_decay": true,
+        "mean_temperature_profiles": true,
+        "rms_temperature_fluctuations": true,
+        "simulation_time_vs_grid_resolution": true,
+        "simulation_time_vs_particle_count": true,
+        "key_findings_summary": true
+    }
 }
